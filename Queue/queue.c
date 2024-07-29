@@ -61,16 +61,13 @@ void enqueue(struct Queue *queue, int value)
         int currentPos = queue->start;
         for (size_t i = 0; i < queue->size; i++)
         {
-            if (currentPos == queue->maxLength)
-            {
-                currentPos = 0;
-            }
             temp[i] = queue->data[currentPos];
-            currentPos++;
+            currentPos = (currentPos + 1) % queue->maxLength;
         }
         
         free(queue->data);
         queue->data = temp;
+        queue->start = 0;
         queue->maxLength += size;
     }
     
