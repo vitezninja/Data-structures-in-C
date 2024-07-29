@@ -3,29 +3,29 @@
 
 void main()
 {
-    initLinkedList();
+    struct Node *linkedList = initLinkedList();
 
-    insertFirst(1);
-    insertAfter(5, 0);
-    insertAfter(10, 1);
-    insertAfter(20, 2);
-    insertFirst(30);
-    insertLast(100);
-    insertAfter(40, 3);
-    printLinkedList();
-    printf("Length: %ld\n", length());
+    insertFirst(linkedList, 1);
+    insertAfter(linkedList, 5, 0);
+    insertAfter(linkedList, 10, 1);
+    insertAfter(linkedList, 20, 2);
+    insertFirst(linkedList, 30);
+    insertLast(linkedList, 100);
+    insertAfter(linkedList, 40, 3);
+    printLinkedList(linkedList);
+    printf("Length: %ld\n", length(linkedList));
     int index = 5;
-    printf("Value at %d: %d\n", index, valueAt(index));
+    printf("Value at %d: %d\n", index, valueAt(linkedList, index));
     
-    int value = removeFirst();
+    int value = removeFirst(linkedList);
     printf("Removed: %d\n", value);
-    printLinkedList();
-    value = removeLast();
+    printLinkedList(linkedList);
+    value = removeLast(linkedList);
     printf("Removed: %d\n", value);
-    printLinkedList();
-    value = removeAfter(2);
+    printLinkedList(linkedList);
+    value = removeAfter(linkedList, 2);
     printf("Removed: %d\n", value);
-    printLinkedList();
+    printLinkedList(linkedList);
 
-    deleteLinkedList();
+    deleteLinkedList(linkedList);
 }

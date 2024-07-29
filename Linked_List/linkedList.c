@@ -1,14 +1,12 @@
 #include "linkedList.h"
 
-struct Node* head;
-
-void initLinkedList()
+struct Node *initLinkedList()
 {
-    head = malloc(1 * sizeof(struct Node));
+    struct Node *head = malloc(1 * sizeof(struct Node));
     head->next = NULL;
 }
 
-void deleteLinkedList()
+void deleteLinkedList(struct Node *head)
 {
     if (head == NULL)
     {
@@ -30,11 +28,11 @@ void deleteLinkedList()
     free(head);
 }
 
-void insertFirst(int value)
+void insertFirst(struct Node *head, int value)
 {
     if (head == NULL)
     {
-        initLinkedList();
+        head = initLinkedList();
     }
     
     struct Node *newNode = malloc(1 * sizeof(struct Node));
@@ -44,11 +42,11 @@ void insertFirst(int value)
     head->next = newNode;
 }
 
-void insertAfter(int value, int offset)
+void insertAfter(struct Node *head, int value, int offset)
 {
     if (offset < 0)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -57,17 +55,17 @@ void insertAfter(int value, int offset)
 
     if (head == NULL)
     {
-        initLinkedList();
+        head = initLinkedList();
     }
 
     if (offset == 0)
     {
-        insertFirst(value);
+        insertFirst(head, value);
         return;
     }
     else if (head->next == NULL)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -80,7 +78,7 @@ void insertAfter(int value, int offset)
     {
         if (ptr->next == NULL)
         {
-            deleteLinkedList();
+            deleteLinkedList(head);
             printf("Index out of bound!");
             exit(-1);
         }
@@ -91,16 +89,16 @@ void insertAfter(int value, int offset)
     ptr->next = newNode;
 }
 
-void insertLast(int value)
+void insertLast(struct Node *head, int value)
 {
     if (head == NULL)
     {
-        initLinkedList();
+        head = initLinkedList();
     }
     
     if (head->next == NULL)
     {
-        insertFirst(value);
+        insertFirst(head, value);
         return;
     }
 
@@ -116,13 +114,13 @@ void insertLast(int value)
     ptr->next = newNode;
 }
 
-int removeFirst()
+int removeFirst(struct Node *head)
 {
     int value;
 
     if (head == NULL || head->next == NULL)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -136,13 +134,13 @@ int removeFirst()
     return value;
 }
 
-int removeAfter(int offset)
+int removeAfter(struct Node *head, int offset)
 {
     int value;
 
     if (head == NULL || head->next == NULL || offset < 0)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -155,7 +153,7 @@ int removeAfter(int offset)
     {
         if (ptr->next == NULL)
         {
-            deleteLinkedList();
+            deleteLinkedList(head);
             printf("Index out of bound!");
             exit(-1);
         }
@@ -171,13 +169,13 @@ int removeAfter(int offset)
     return value;
 }
 
-int removeLast()
+int removeLast(struct Node *head)
 {
     int value;
 
     if (head == NULL || head->next == NULL)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -197,18 +195,18 @@ int removeLast()
     return value;
 }
 
-int valueAt(int offset)
+int valueAt(struct Node *head, int offset)
 {
     if (offset < 0)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
 
     if (head == NULL || head->next == NULL)
     {
-        deleteLinkedList();
+        deleteLinkedList(head);
         printf("Index out of bound!");
         exit(-1);
     }
@@ -220,7 +218,7 @@ int valueAt(int offset)
     {
         if (ptr->next == NULL)
         {
-            deleteLinkedList();
+            deleteLinkedList(head);
             printf("Index out of bound!");
             exit(-1);
         }
@@ -229,11 +227,11 @@ int valueAt(int offset)
     return ptr->value;
 }
 
-size_t length()
+size_t length(struct Node *head)
 {
     if (head == NULL)
     {
-        initLinkedList();
+        head = initLinkedList();
     }
     
     struct Node *ptr = head;
@@ -247,7 +245,7 @@ size_t length()
     return length;
 }
 
-void printLinkedList()
+void printLinkedList(struct Node *head)
 {
     if (head == NULL || head->next == NULL)
     {
