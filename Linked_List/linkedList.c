@@ -282,6 +282,12 @@ void printLinkedList(struct Node *head)
         exit(-1);
     }
 
+    if (head->next == NULL)
+    {
+        printf("The Linked List was empty!\n");
+        return;
+    }
+
     struct Node *ptr = head->next;
     int counter = 0;
     while (ptr != NULL)

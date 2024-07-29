@@ -156,7 +156,7 @@ void printStack(struct Stack *stack)
 
     if (isEmpty(stack))
     {
-        printf("The stack was empty!\n");
+        printf("The Stack was empty!\n");
         return;
     }
 
