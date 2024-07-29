@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stack.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "vector": "c",
+        "xstring": "c",
+        "xutility": "c"
+    }
+}
