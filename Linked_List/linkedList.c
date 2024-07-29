@@ -3,88 +3,90 @@
 struct Node *initLinkedList()
 {
     struct Node *head = malloc(1 * sizeof(struct Node));
+    if (head == NULL)
+    {
+        fprintf(stderr, "ERROR: Memory allocation for Linked List structure failed!\n");
+        exit(-1);
+    }
+
     head->next = NULL;
+    return head;
 }
 
 void deleteLinkedList(struct Node *head)
 {
     if (head == NULL)
     {
-        return;
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
 
-    if (head->next != NULL)
+    struct Node *ptr = head;
+    struct Node *nextPtr;
+    while(ptr != NULL)
     {
-        struct Node *ptr = head->next;
-        struct Node *nextPtr;
-        while(ptr->next != NULL)
-        {
-            nextPtr = ptr->next;
-            free(ptr);
-            ptr = nextPtr;
-        }
+        nextPtr = ptr->next;
         free(ptr);
+        ptr = nextPtr;
     }
-    free(head);
 }
 
 void insertFirst(struct Node *head, int value)
 {
     if (head == NULL)
     {
-        head = initLinkedList();
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
     
     struct Node *newNode = malloc(1 * sizeof(struct Node));
+    if (newNode == NULL)
+    {
+        fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
     newNode->value = value;
     newNode->next = head->next;
-
     head->next = newNode;
 }
 
 void insertAfter(struct Node *head, int value, int offset)
 {
-    if (offset < 0)
-    {
-        deleteLinkedList(head);
-        printf("Index out of bound!");
-        exit(-1);
-    }
-
-    offset++;
-
     if (head == NULL)
     {
-        head = initLinkedList();
-    }
-
-    if (offset == 0)
-    {
-        insertFirst(head, value);
-        return;
-    }
-    else if (head->next == NULL)
-    {
-        deleteLinkedList(head);
-        printf("Index out of bound!");
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);
     }
-    
-    struct Node *newNode = malloc(1 * sizeof(struct Node));
-    newNode->value = value;
+    else if (offset < 0)
+    {
+        fprintf(stderr, "ERROR: Index out of bound!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
 
-    struct Node *ptr = head->next;
-    for (size_t i = 1; i < offset; i++)
+    struct Node *ptr = head;
+    for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
         {
+            fprintf(stderr, "ERROR: Index out of bound!\n");
             deleteLinkedList(head);
-            printf("Index out of bound!");
             exit(-1);
         }
         ptr = ptr->next;
     }
 
+    struct Node *newNode = malloc(1 * sizeof(struct Node));
+    if (newNode == NULL)
+    {
+        fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
+    newNode->value = value;
     newNode->next = ptr->next;
     ptr->next = newNode;
 }
@@ -93,16 +95,18 @@ void insertLast(struct Node *head, int value)
 {
     if (head == NULL)
     {
-        head = initLinkedList();
-    }
-    
-    if (head->next == NULL)
-    {
-        insertFirst(head, value);
-        return;
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
 
     struct Node *newNode = malloc(1 * sizeof(struct Node));
+    if (newNode == NULL)
+    {
+        fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
     newNode->value = value;
     newNode->next = NULL;
 
@@ -116,19 +120,22 @@ void insertLast(struct Node *head, int value)
 
 int removeFirst(struct Node *head)
 {
-    int value;
-
-    if (head == NULL || head->next == NULL)
+    if (head == NULL)
     {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (head->next == NULL)
+    {
+        fprintf(stderr, "ERROR: No elements in the Linked List!\n");
         deleteLinkedList(head);
-        printf("Index out of bound!");
         exit(-1);
     }
     
-    value = head->next->value;
+    int value = head->next->value;
     struct Node *ptr = head->next;
     head->next = head->next->next;
-
     free(ptr);
 
     return value;
@@ -136,47 +143,65 @@ int removeFirst(struct Node *head)
 
 int removeAfter(struct Node *head, int offset)
 {
-    int value;
-
-    if (head == NULL || head->next == NULL || offset < 0)
+    if (head == NULL)
     {
-        deleteLinkedList(head);
-        printf("Index out of bound!");
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);
     }
 
-    offset++;
+    if (head->next == NULL)
+    {
+        fprintf(stderr, "ERROR: No elements in the Linked List!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
+    if (offset < 0)
+    {
+        fprintf(stderr, "ERROR: Index out of bound!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
 
     struct Node *ptr = head;
-    struct Node *previousPtr;
-    for (size_t i = 0; i < offset + 1; i++)
+    for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
         {
+            fprintf(stderr, "ERROR: Index out of bound!\n");
             deleteLinkedList(head);
-            printf("Index out of bound!");
             exit(-1);
         }
-        previousPtr = ptr;
         ptr = ptr->next;
     }
 
-    previousPtr->next = ptr->next;
+    struct Node *toDelete = ptr->next;
+    if (toDelete == NULL)
+    {
+        fprintf(stderr, "ERROR: No element to remove after the given offset!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
 
-    value = ptr->value;
-    free(ptr);
+    int value = toDelete->value;
+    ptr->next = toDelete->next;
+    free(toDelete);
 
     return value;
 }
 
 int removeLast(struct Node *head)
 {
-    int value;
-
-    if (head == NULL || head->next == NULL)
+    if (head == NULL)
     {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (head->next == NULL)
+    {
+        fprintf(stderr, "ERROR: No elements in the Linked List!\n");
         deleteLinkedList(head);
-        printf("Index out of bound!");
         exit(-1);
     }
 
@@ -187,9 +212,8 @@ int removeLast(struct Node *head)
     }
     
     struct Node *oldPtr = ptr->next;
+    int value = oldPtr->value;
     ptr->next = NULL;
-
-    value = oldPtr->value;
     free(oldPtr);
 
     return value;
@@ -197,29 +221,33 @@ int removeLast(struct Node *head)
 
 int valueAt(struct Node *head, int offset)
 {
+    if (head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (head->next == NULL)
+    {
+        fprintf(stderr, "ERROR: No elements in the Linked List!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
     if (offset < 0)
     {
+        fprintf(stderr, "ERROR: Index out of bound!\n");
         deleteLinkedList(head);
-        printf("Index out of bound!");
         exit(-1);
     }
-
-    if (head == NULL || head->next == NULL)
-    {
-        deleteLinkedList(head);
-        printf("Index out of bound!");
-        exit(-1);
-    }
-
-    offset++;
 
     struct Node *ptr = head;
-    for (size_t i = 0; i < offset; i++)
+    for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
         {
+            fprintf(stderr, "ERROR: Index out of bound!\n");
             deleteLinkedList(head);
-            printf("Index out of bound!");
             exit(-1);
         }
         ptr = ptr->next;
@@ -231,12 +259,13 @@ size_t length(struct Node *head)
 {
     if (head == NULL)
     {
-        head = initLinkedList();
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
     
-    struct Node *ptr = head;
+    struct Node *ptr = head->next;
     size_t length = 0;
-    while (ptr->next != NULL)
+    while (ptr != NULL)
     {
         length++;
         ptr = ptr->next;
@@ -247,18 +276,18 @@ size_t length(struct Node *head)
 
 void printLinkedList(struct Node *head)
 {
-    if (head == NULL || head->next == NULL)
+    if (head == NULL)
     {
-        return;
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
 
     struct Node *ptr = head->next;
     int counter = 0;
-    while (ptr->next != NULL)
+    while (ptr != NULL)
     {
         printf("At %d: %d\n", counter, ptr->value);
         counter++;
         ptr = ptr->next;
     }
-    printf("At %d: %d\n", counter, ptr->value);
 }
