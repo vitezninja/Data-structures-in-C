@@ -95,7 +95,7 @@ int top(struct Stack *stack)
     if (isEmpty(stack))
     {
         deleteStack(stack);
-        fprintf(stderr, "ERROR: The stack was empty!\n");
+        fprintf(stderr, "ERROR: The Stack was empty!\n");
         exit(-1);
     }
 
