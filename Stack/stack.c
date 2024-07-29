@@ -5,7 +5,7 @@ struct Stack *initStack()
     struct Stack *stack = malloc(1 * sizeof(struct Stack));
     if (stack == NULL)
     {
-        fprintf(stderr, "ERROR: Memory allocation for stack structure failed!\n");
+        fprintf(stderr, "ERROR: Memory allocation for Stack structure failed!\n");
         exit(-1);
     }
 
@@ -14,7 +14,7 @@ struct Stack *initStack()
     stack->data = malloc(size * sizeof(int));
     if (stack->data == NULL)
     {
-        fprintf(stderr, "ERROR: Memory allocation for stack data failed!\n");
+        fprintf(stderr, "ERROR: Memory allocation for Stack data failed!\n");
         free(stack);
         exit(-1);
     }
@@ -77,7 +77,7 @@ int pop(struct Stack *stack)
     if (isEmpty(stack))
     {
         deleteStack(stack);
-        fprintf(stderr, "ERROR: The stack was empty!\n");
+        fprintf(stderr, "ERROR: The Stack was empty!\n");
         exit(-1);
     }
 
