@@ -16,11 +16,11 @@ void deleteBST(struct TreeNode *root);
 
 void _deleteNode(struct TreeNode *node);
 
-void insert(struct TreeNode *root, int value);
+struct TreeNode *insert(struct TreeNode *root, int value);
 
-struct TreeNode * _insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert);
+struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert);
 
-void removeBST(struct TreeNode *root, int value);
+struct TreeNode *removeBST(struct TreeNode *root, int value);
 
 struct TreeNode *_removeRec(struct TreeNode *node, int value);
 

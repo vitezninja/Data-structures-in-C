@@ -39,7 +39,7 @@ void _deleteNode(struct TreeNode *node)
     free(node);
 }
 
-void insert(struct TreeNode *root, int value)
+struct TreeNode *insert(struct TreeNode *root, int value)
 {
     struct TreeNode *newNode = malloc(1 * sizeof(struct TreeNode));
     if (newNode == NULL)
@@ -53,10 +53,10 @@ void insert(struct TreeNode *root, int value)
     newNode->left = NULL;
     newNode->right = NULL;
 
-    root = _insertRec(root, value, newNode);
+    return _insertRec(root, value, newNode);
 }
 
-struct TreeNode * _insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert)
+struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert)
 {
     if (node == NULL)
     {
@@ -74,7 +74,7 @@ struct TreeNode * _insertRec(struct TreeNode *node, int value, struct TreeNode *
     return node;
 }
 
-void removeBST(struct TreeNode *root, int value)
+struct TreeNode *removeBST(struct TreeNode *root, int value)
 {
     if (root == NULL)
     {
@@ -82,7 +82,7 @@ void removeBST(struct TreeNode *root, int value)
         exit(-1);
     }
     
-    _removeRec(root, value);
+    return _removeRec(root, value);
 }
 
 struct TreeNode *_removeRec(struct TreeNode *node, int value)
