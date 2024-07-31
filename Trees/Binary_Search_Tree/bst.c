@@ -71,6 +71,7 @@ struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *t
     {
         node->right = _insertRec(node->right, value, toInsert);
     }
+
     return node;
 }
 
@@ -100,29 +101,24 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value)
     {
         node->left = _removeRec(node->left, value);
     }
-    else if (node->key == value)
+    else
     {
-        if (childCount(node) == 0)
+        int _childCount = childCount(node);
+        if (_childCount == 0)
         {
             free(node);
             return NULL;
         }
-        else if (childCount(node) == 1)
+        else if (_childCount == 1)
         {
             struct TreeNode *temp;
-            if (node->left != NULL)
-            {
-                temp = node->left;
-            }
-            else
-            {
-                temp = node->right;
-            }
+
+            temp = node->left != NULL ? node->left : node->right;
 
             free(node);
             return temp;
         }
-        else if (childCount(node) == 2)
+        else
         {
             struct TreeNode *temp = _findMin(node->right);
             node->key = temp->key;
@@ -162,19 +158,11 @@ struct TreeNode *search(struct TreeNode *root, int target)
     }
     else if (root->key > target)
     {
-        if (root->left == NULL)
-        {
-            return NULL;
-        }
-        return search(root->left, target);
+        return root->left == NULL ? NULL : search(root->left, target);
     }
     else
     {
-        if (root->right == NULL)
-        {
-            return NULL;
-        }
-        return search(root->right, target);
+        return root->right == NULL ? NULL : search(root->right, target);
     }
 }
 
