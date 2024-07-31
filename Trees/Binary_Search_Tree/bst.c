@@ -53,7 +53,7 @@ void insert(struct TreeNode *root, int value)
     newNode->left = NULL;
     newNode->right = NULL;
 
-    _insertRec(root, value, newNode);
+    root = _insertRec(root, value, newNode);
 }
 
 struct TreeNode * _insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert)
