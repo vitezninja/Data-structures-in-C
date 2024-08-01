@@ -257,16 +257,41 @@ struct TreeNode *_rightSubTreeShrunk(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-//TODO:
-struct TreeNode *remMin(struct TreeNode *node)
+struct TreeNode *remMin(struct TreeNode *root, struct TreeNode **out)
 {
+    if (root == NULL)
+    {
+        fprintf(stderr, "ERROR: AVL Tree is not initialized!\n");
+        exit(-1);
+    }
 
+    int rebalance = 0;
+    return _remMinRec(root, out, &rebalance);
 }
 
-//TODO:
-struct TreeNode *_remMinRec(struct TreeNode *node, int *rebalance)
+struct TreeNode *_remMinRec(struct TreeNode *node, struct TreeNode **out, int *rebalance)
 {
+    if (node == NULL)
+    {
+        return NULL;
+    }
 
+    if (node->left == NULL)
+    {
+        *out = node;
+        node = (*out)->right;
+        (*out)->right = NULL;
+        *rebalance = 1;
+    }
+    else
+    {
+        node->left = _remMinRec(node->left, out, rebalance);
+        if (*rebalance)
+        {
+            node = _leftSubTreeShrunk(node, rebalance);
+        }
+    }
+    return node;
 }
 
 struct TreeNode *removeAVL(struct TreeNode *root, int value)
@@ -281,15 +306,14 @@ struct TreeNode *removeAVL(struct TreeNode *root, int value)
     return _removeRec(root, value, &rebalance);
 }
 
-//TODO:
 struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance)
 {
     if (node == NULL)
     {
         *rebalance = 0;
-        return NULL;
+        return node;
     }
-
+    
     if (node->key < value)
     {
         node->right = _removeRec(node->right, value, rebalance);
@@ -308,35 +332,49 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance)
     }
     else
     {
-        if (childCount(node) == 0)
-        {
-            free(node);
-            return NULL;
-        }
-        else if (childCount(node) == 1)
-        {
-            struct TreeNode *temp;
-            if (node->left != NULL)
-            {
-                temp = node->left;
-            }
-            else
-            {
-                temp = node->right;
-            }
+        node = _removeRoot(node, rebalance);
+    }
 
-            free(node);
-            return temp;
-        }
-        else if (childCount(node) == 2)
+    return node;
+}
+
+struct TreeNode *_removeRoot(struct TreeNode *node, int *rebalance)
+{
+    struct TreeNode *pointer = node;
+    if (node->left == NULL)
+    {
+        node = pointer->right;
+        free(pointer);
+        *rebalance = 1;
+    }
+    else if (node->right == NULL)
+    {
+        node = pointer->left;
+        free(pointer);
+        *rebalance = 1;
+    }
+    else if (node->left != NULL && node->right != NULL)
+    {
+        node = _rightSubTreeMinToRoot(node, rebalance);
+        if (*rebalance)
         {
-            struct TreeNode *temp = _findMin(node->right);
-            node->key = temp->key;
-            node->right = _removeRec(node->right, temp->key, rebalance);
+            node = _rightSubTreeShrunk(node, rebalance);
         }
     }
 
     return node;
+}
+
+struct TreeNode *_rightSubTreeMinToRoot(struct TreeNode *node, int *rebalance)
+{
+    struct TreeNode *out;
+    node->right = _remMinRec(node->right, &out, rebalance);
+    out->left = node->left;
+    out->right = node->right;
+    out->balance = node->balance;
+    free(node);
+
+    return out;
 }
 
 struct TreeNode *_findMin(struct TreeNode *node)

@@ -45,13 +45,17 @@ struct TreeNode *_leftSubTreeShrunk(struct TreeNode *node, int *rebalance);
 
 struct TreeNode *_rightSubTreeShrunk(struct TreeNode *node, int *rebalance);
 
-struct TreeNode *remMin(struct TreeNode *node);
+struct TreeNode *remMin(struct TreeNode *node, struct TreeNode **out);
 
-struct TreeNode *_remMinRec(struct TreeNode *node, int *rebalance);
+struct TreeNode *_remMinRec(struct TreeNode *node, struct TreeNode **out, int *rebalance);
 
 struct TreeNode *removeAVL(struct TreeNode *root, int value);
 
 struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance);
+
+struct TreeNode *_removeRoot(struct TreeNode *node, int *rebalance);
+
+struct TreeNode *_rightSubTreeMinToRoot(struct TreeNode *node, int *rebalance);
 
 struct TreeNode *_findMin(struct TreeNode *node);
 

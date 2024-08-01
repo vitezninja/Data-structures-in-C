@@ -22,9 +22,10 @@ void main()
         printf("60 not found\n");
     }
 
-    //root = removeAVL(root, 70);
-    //printf("After Delete:\n");
-    //preOrderPrint(root);
+    struct TreeNode *out;
+    root = removeAVL(root, 70);
+    printf("After Delete: \n");
+    preOrderPrint(root);
 
     deleteAVL(root);
 }
