@@ -3,32 +3,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+typedef struct Node
 {
     int value;
     struct Node *next;
-};
+} Node;
 
-struct Node *initLinkedList();
+Node *initLinkedList();
 
-void deleteLinkedList(struct Node *head);
+void deleteLinkedList(Node *head);
 
-void insertFirst(struct Node *head, int value);
+void insertFirst(Node *head, int value);
 
-void insertAfter(struct Node *head, int value, int offset);
+void insertAfter(Node *head, int value, int offset);
 
-void insertLast(struct Node *head, int value);
+void insertLast(Node *head, int value);
 
-int removeFirst(struct Node *head);
+int removeFirst(Node *head);
 
-int removeAfter(struct Node *head, int offset);
+int removeAfter(Node *head, int offset);
 
-int removeLast(struct Node *head);
+int removeLast(Node *head);
 
-int valueAt(struct Node *head, int offset);
+int valueAt(Node *head, int offset);
 
-size_t length(struct Node *head);
+size_t length(Node *head);
 
-void printLinkedList(struct Node *head);
+void printLinkedList(Node *head);
 
 #endif

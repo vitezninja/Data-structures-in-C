@@ -3,43 +3,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode
+typedef struct TreeNode
 {
     int key;
     struct TreeNode *left;
     struct TreeNode *right;
-};
+} TreeNode;
 
 struct TreeNode *initBST(int value);
 
-void deleteBST(struct TreeNode *root);
+void deleteBST(TreeNode *root);
 
-void _deleteNode(struct TreeNode *node);
+void _deleteNode(TreeNode *node);
 
-struct TreeNode *insert(struct TreeNode *root, int value);
+TreeNode *insert(TreeNode *root, int value);
 
-struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert);
+TreeNode *_insertRec(TreeNode *node, int value, TreeNode *toInsert);
 
-struct TreeNode *removeBST(struct TreeNode *root, int value);
+TreeNode *removeBST(TreeNode *root, int value);
 
-struct TreeNode *_removeRec(struct TreeNode *node, int value);
+TreeNode *_removeRec(TreeNode *node, int value);
 
-struct TreeNode *_findMin(struct TreeNode *node);
+TreeNode *_findMin(TreeNode *node);
 
-struct TreeNode *search(struct TreeNode *root, int target);
+TreeNode *search(TreeNode *root, int target);
 
-int childCount(struct TreeNode *node);
+int childCount(TreeNode *node);
 
-void preOrderPrint(struct TreeNode *node);
+void preOrderPrint(TreeNode *node);
 
-void _preOrderPrintRec(struct TreeNode *node);
+void _preOrderPrintRec(TreeNode *node);
 
-void postOrderPrint(struct TreeNode *node);
+void postOrderPrint(TreeNode *node);
 
-void _postOrderPrintRec(struct TreeNode *node);
+void _postOrderPrintRec(TreeNode *node);
 
-void inOrderPrint(struct TreeNode *node);
+void inOrderPrint(TreeNode *node);
 
-void _inOrderPrintRec(struct TreeNode *node);
+void _inOrderPrintRec(TreeNode *node);
 
 #endif

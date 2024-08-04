@@ -1,8 +1,8 @@
 #include "avl.h"
 
-struct TreeNode *initAVL(int value)
+TreeNode *initAVL(int value)
 {
-    struct TreeNode *root = malloc(1 * sizeof(struct TreeNode));
+    TreeNode *root = (TreeNode *)malloc(sizeof(TreeNode));
     if (root == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for AVL Tree structure failed!\n");
@@ -17,7 +17,7 @@ struct TreeNode *initAVL(int value)
     return root;
 }
 
-void deleteAVL(struct TreeNode *root)
+void deleteAVL(TreeNode *root)
 {
     if (root == NULL)
     {
@@ -28,7 +28,7 @@ void deleteAVL(struct TreeNode *root)
     _deleteNode(root);
 }
 
-void _deleteNode(struct TreeNode *node)
+void _deleteNode(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -40,9 +40,9 @@ void _deleteNode(struct TreeNode *node)
     free(node);
 }
 
-struct TreeNode *_balancePP(struct TreeNode *node, int *rebalance)
+TreeNode *_balancePP(TreeNode *node, int *rebalance)
 {
-    struct TreeNode *right = node->right;
+    TreeNode *right = node->right;
     if (right->balance == -1)
     {
         node = _balancePPm(node, right);
@@ -60,9 +60,9 @@ struct TreeNode *_balancePP(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_balanceMM(struct TreeNode *node, int *rebalance)
+TreeNode *_balanceMM(TreeNode *node, int *rebalance)
 {
-    struct TreeNode *left = node->left;
+    TreeNode *left = node->left;
     if (left->balance == -1)
     {
         node = _balanceMMm(node, left);
@@ -80,7 +80,7 @@ struct TreeNode *_balanceMM(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_balancePPp(struct TreeNode *node, struct TreeNode *right)
+TreeNode *_balancePPp(TreeNode *node, TreeNode *right)
 {
     node->right = right->left;
     right->left = node;
@@ -89,7 +89,7 @@ struct TreeNode *_balancePPp(struct TreeNode *node, struct TreeNode *right)
     return right;
 }
 
-struct TreeNode *_balanceMMm(struct TreeNode *node, struct TreeNode *left)
+TreeNode *_balanceMMm(TreeNode *node, TreeNode *left)
 {
     node->left = left->right;
     left->right = node;
@@ -98,9 +98,9 @@ struct TreeNode *_balanceMMm(struct TreeNode *node, struct TreeNode *left)
     return left;
 }
 
-struct TreeNode *_balancePPm(struct TreeNode *node, struct TreeNode *right)
+TreeNode *_balancePPm(TreeNode *node, TreeNode *right)
 {
-    struct TreeNode *left = right->left;
+    TreeNode *left = right->left;
     node->right = left->left;
     right->left = left->right;
     left->left = node;
@@ -111,9 +111,9 @@ struct TreeNode *_balancePPm(struct TreeNode *node, struct TreeNode *right)
     return left;
 }
 
-struct TreeNode *_balanceMMp(struct TreeNode *node, struct TreeNode *left)
+TreeNode *_balanceMMp(TreeNode *node, TreeNode *left)
 {
-    struct TreeNode *right = left->right;
+    TreeNode *right = left->right;
     left->right = right->left;
     node->left = right->right;
     right->left = left;
@@ -124,7 +124,7 @@ struct TreeNode *_balanceMMp(struct TreeNode *node, struct TreeNode *left)
     return right;
 }
 
-struct TreeNode *_balancePP0(struct TreeNode *node, struct TreeNode *right)
+TreeNode *_balancePP0(TreeNode *node, TreeNode *right)
 {
     node->right = right->left;
     right->left = node;
@@ -133,7 +133,7 @@ struct TreeNode *_balancePP0(struct TreeNode *node, struct TreeNode *right)
     return right;
 }
 
-struct TreeNode *_balanceMM0(struct TreeNode *node, struct TreeNode *left)
+TreeNode *_balanceMM0(TreeNode *node, TreeNode *left)
 {
     node->left = left->right;
     left->right = node;
@@ -142,9 +142,9 @@ struct TreeNode *_balanceMM0(struct TreeNode *node, struct TreeNode *left)
     return left;
 }
 
-struct TreeNode *insert(struct TreeNode *root, int value)
+TreeNode *insert(TreeNode *root, int value)
 {
-    struct TreeNode *newNode = malloc(1 * sizeof(struct TreeNode));
+    TreeNode *newNode = (TreeNode *)malloc(sizeof(TreeNode));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new TreeNode failed!\n");
@@ -161,7 +161,7 @@ struct TreeNode *insert(struct TreeNode *root, int value)
     return _insertRec(root, value, newNode, &rebalance);
 }
 
-struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert, int *rebalance)
+TreeNode *_insertRec(TreeNode *node, int value, TreeNode *toInsert, int *rebalance)
 {
     if (node == NULL)
     {
@@ -193,11 +193,11 @@ struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *t
     return node;
 }
 
-struct TreeNode *_leftSubTreeGrown(struct TreeNode *node, int *rebalance)
+TreeNode *_leftSubTreeGrown(TreeNode *node, int *rebalance)
 {
     if (node->balance == -1)
     {
-        struct TreeNode *left = node->left;
+        TreeNode *left = node->left;
         node = left->balance == -1 ? _balanceMMm(node, left) : _balanceMMp(node, left);
         *rebalance = 0;
     }
@@ -210,11 +210,11 @@ struct TreeNode *_leftSubTreeGrown(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_rightSubTreeGrown(struct TreeNode *node, int *rebalance)
+TreeNode *_rightSubTreeGrown(TreeNode *node, int *rebalance)
 {
     if (node->balance == 1)
     {
-        struct TreeNode *right = node->right;
+        TreeNode *right = node->right;
         node = right->balance == 1 ? _balancePPp(node, right) : _balancePPm(node, right);
         *rebalance = 0;
     }
@@ -227,7 +227,7 @@ struct TreeNode *_rightSubTreeGrown(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_leftSubTreeShrunk(struct TreeNode *node, int *rebalance)
+TreeNode *_leftSubTreeShrunk(TreeNode *node, int *rebalance)
 {
     if (node->balance == 1)
     {
@@ -242,7 +242,7 @@ struct TreeNode *_leftSubTreeShrunk(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_rightSubTreeShrunk(struct TreeNode *node, int *rebalance)
+TreeNode *_rightSubTreeShrunk(TreeNode *node, int *rebalance)
 {
     if (node->balance == -1)
     {
@@ -257,7 +257,7 @@ struct TreeNode *_rightSubTreeShrunk(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *remMin(struct TreeNode *root, struct TreeNode **out)
+TreeNode *remMin(TreeNode *root, TreeNode **out)
 {
     if (root == NULL)
     {
@@ -269,7 +269,7 @@ struct TreeNode *remMin(struct TreeNode *root, struct TreeNode **out)
     return _remMinRec(root, out, &rebalance);
 }
 
-struct TreeNode *_remMinRec(struct TreeNode *node, struct TreeNode **out, int *rebalance)
+TreeNode *_remMinRec(TreeNode *node, TreeNode **out, int *rebalance)
 {
     if (node == NULL)
     {
@@ -294,7 +294,7 @@ struct TreeNode *_remMinRec(struct TreeNode *node, struct TreeNode **out, int *r
     return node;
 }
 
-struct TreeNode *removeAVL(struct TreeNode *root, int value)
+TreeNode *removeAVL(TreeNode *root, int value)
 {
     if (root == NULL)
     {
@@ -306,7 +306,7 @@ struct TreeNode *removeAVL(struct TreeNode *root, int value)
     return _removeRec(root, value, &rebalance);
 }
 
-struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance)
+TreeNode *_removeRec(TreeNode *node, int value, int *rebalance)
 {
     if (node == NULL)
     {
@@ -338,9 +338,9 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance)
     return node;
 }
 
-struct TreeNode *_removeRoot(struct TreeNode *node, int *rebalance)
+TreeNode *_removeRoot(TreeNode *node, int *rebalance)
 {
-    struct TreeNode *pointer = node;
+    TreeNode *pointer = node;
     if (node->left == NULL)
     {
         node = pointer->right;
@@ -365,9 +365,9 @@ struct TreeNode *_removeRoot(struct TreeNode *node, int *rebalance)
     return node;
 }
 
-struct TreeNode *_rightSubTreeMinToRoot(struct TreeNode *node, int *rebalance)
+TreeNode *_rightSubTreeMinToRoot(TreeNode *node, int *rebalance)
 {
-    struct TreeNode *out;
+    TreeNode *out;
     node->right = _remMinRec(node->right, &out, rebalance);
     out->left = node->left;
     out->right = node->right;
@@ -377,7 +377,7 @@ struct TreeNode *_rightSubTreeMinToRoot(struct TreeNode *node, int *rebalance)
     return out;
 }
 
-struct TreeNode *_findMin(struct TreeNode *node)
+TreeNode *_findMin(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -392,7 +392,7 @@ struct TreeNode *_findMin(struct TreeNode *node)
     return node;
 }
 
-struct TreeNode *search(struct TreeNode *root, int target)
+TreeNode *search(TreeNode *root, int target)
 {
     if (root == NULL)
     {
@@ -414,7 +414,7 @@ struct TreeNode *search(struct TreeNode *root, int target)
     }
 }
 
-int childCount(struct TreeNode *node)
+int childCount(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -434,7 +434,7 @@ int childCount(struct TreeNode *node)
     return count;
 }
 
-void preOrderPrint(struct TreeNode *node)
+void preOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -446,7 +446,7 @@ void preOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _preOrderPrintRec(struct TreeNode *node)
+void _preOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -458,7 +458,7 @@ void _preOrderPrintRec(struct TreeNode *node)
     _preOrderPrintRec(node->right);
 }
 
-void postOrderPrint(struct TreeNode *node)
+void postOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -470,7 +470,7 @@ void postOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _postOrderPrintRec(struct TreeNode *node)
+void _postOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -482,7 +482,7 @@ void _postOrderPrintRec(struct TreeNode *node)
     printf("%d ", node->key);
 }
 
-void inOrderPrint(struct TreeNode *node)
+void inOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -494,7 +494,7 @@ void inOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _inOrderPrintRec(struct TreeNode *node)
+void _inOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {

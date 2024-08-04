@@ -3,76 +3,76 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode
+typedef struct TreeNode
 {
     int key;
     int balance;
     struct TreeNode *left;
     struct TreeNode *right;
-};
+} TreeNode;
 
-struct TreeNode *initAVL(int value);
+TreeNode *initAVL(int value);
 
-void deleteAVL(struct TreeNode *root);
+void deleteAVL(TreeNode *root);
 
-void _deleteNode(struct TreeNode *node);
+void _deleteNode(TreeNode *node);
 
-struct TreeNode *_balancePP(struct TreeNode *node, int *rebalance);
+TreeNode *_balancePP(TreeNode *node, int *rebalance);
 
-struct TreeNode *_balanceMM(struct TreeNode *node, int *rebalance);
+TreeNode *_balanceMM(TreeNode *node, int *rebalance);
 
-struct TreeNode *_balancePPp(struct TreeNode *node, struct TreeNode *right);
+TreeNode *_balancePPp(TreeNode *node, TreeNode *right);
 
-struct TreeNode *_balanceMMm(struct TreeNode *node, struct TreeNode *left);
+TreeNode *_balanceMMm(TreeNode *node, TreeNode *left);
 
-struct TreeNode *_balancePPm(struct TreeNode *node, struct TreeNode *right);
+TreeNode *_balancePPm(TreeNode *node, TreeNode *right);
 
-struct TreeNode *_balanceMMp(struct TreeNode *node, struct TreeNode *left);
+TreeNode *_balanceMMp(TreeNode *node, TreeNode *left);
 
-struct TreeNode *_balancePP0(struct TreeNode *node, struct TreeNode *right);
+TreeNode *_balancePP0(TreeNode *node, TreeNode *right);
 
-struct TreeNode *_balanceMM0(struct TreeNode *node, struct TreeNode *left);
+TreeNode *_balanceMM0(TreeNode *node, TreeNode *left);
 
-struct TreeNode *insert(struct TreeNode *root, int value);
+TreeNode *insert(TreeNode *root, int value);
 
-struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert, int *rebalance);
+TreeNode *_insertRec(TreeNode *node, int value, TreeNode *toInsert, int *rebalance);
 
-struct TreeNode *_leftSubTreeGrown(struct TreeNode *node, int *rebalance);
+TreeNode *_leftSubTreeGrown(TreeNode *node, int *rebalance);
 
-struct TreeNode *_rightSubTreeGrown(struct TreeNode *node, int *rebalance);
+TreeNode *_rightSubTreeGrown(TreeNode *node, int *rebalance);
 
-struct TreeNode *_leftSubTreeShrunk(struct TreeNode *node, int *rebalance);
+TreeNode *_leftSubTreeShrunk(TreeNode *node, int *rebalance);
 
-struct TreeNode *_rightSubTreeShrunk(struct TreeNode *node, int *rebalance);
+TreeNode *_rightSubTreeShrunk(TreeNode *node, int *rebalance);
 
-struct TreeNode *remMin(struct TreeNode *node, struct TreeNode **out);
+TreeNode *remMin(TreeNode *node, TreeNode **out);
 
-struct TreeNode *_remMinRec(struct TreeNode *node, struct TreeNode **out, int *rebalance);
+TreeNode *_remMinRec(TreeNode *node, TreeNode **out, int *rebalance);
 
-struct TreeNode *removeAVL(struct TreeNode *root, int value);
+TreeNode *removeAVL(TreeNode *root, int value);
 
-struct TreeNode *_removeRec(struct TreeNode *node, int value, int *rebalance);
+TreeNode *_removeRec(TreeNode *node, int value, int *rebalance);
 
-struct TreeNode *_removeRoot(struct TreeNode *node, int *rebalance);
+TreeNode *_removeRoot(TreeNode *node, int *rebalance);
 
-struct TreeNode *_rightSubTreeMinToRoot(struct TreeNode *node, int *rebalance);
+TreeNode *_rightSubTreeMinToRoot(TreeNode *node, int *rebalance);
 
-struct TreeNode *_findMin(struct TreeNode *node);
+TreeNode *_findMin(TreeNode *node);
 
-struct TreeNode *search(struct TreeNode *root, int target);
+TreeNode *search(TreeNode *root, int target);
 
-int childCount(struct TreeNode *node);
+int childCount(TreeNode *node);
 
-void preOrderPrint(struct TreeNode *node);
+void preOrderPrint(TreeNode *node);
 
-void _preOrderPrintRec(struct TreeNode *node);
+void _preOrderPrintRec(TreeNode *node);
 
-void postOrderPrint(struct TreeNode *node);
+void postOrderPrint(TreeNode *node);
 
-void _postOrderPrintRec(struct TreeNode *node);
+void _postOrderPrintRec(TreeNode *node);
 
-void inOrderPrint(struct TreeNode *node);
+void inOrderPrint(TreeNode *node);
 
-void _inOrderPrintRec(struct TreeNode *node);
+void _inOrderPrintRec(TreeNode *node);
 
 #endif

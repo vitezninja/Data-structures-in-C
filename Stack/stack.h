@@ -5,31 +5,31 @@
 
 #define STACK_INCREMENT_SIZE 10;
 
-struct Stack
+typedef struct Stack
 {
     int *data;
     int currentSize;
     int maxHeight;
-};
+} Stack;
 
-struct Stack *initStack();
+Stack *initStack();
 
-void deleteStack(struct Stack *stack);
+void deleteStack(Stack *stack);
 
-void push(struct Stack *stack, int value);
+void push(Stack *stack, int value);
 
-int pop(struct Stack *stack);
+int pop(Stack *stack);
 
-int top(struct Stack *stack);
+int top(Stack *stack);
 
-int isFull(struct Stack *stack);
+int isFull(Stack *stack);
 
-int isEmpty(struct Stack *stack);
+int isEmpty(Stack *stack);
 
-void setEmpty(struct Stack *stack);
+void setEmpty(Stack *stack);
 
-size_t length(struct Stack *stack);
+size_t length(Stack *stack);
 
-void printStack(struct Stack *stack);
+void printStack(Stack *stack);
 
 #endif

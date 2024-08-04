@@ -1,8 +1,8 @@
 #include "linkedList.h"
 
-struct Node *initLinkedList()
+Node *initLinkedList()
 {
-    struct Node *head = malloc(1 * sizeof(struct Node));
+    Node *head = (Node *)malloc(sizeof(Node));
     if (head == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Linked List structure failed!\n");
@@ -13,7 +13,7 @@ struct Node *initLinkedList()
     return head;
 }
 
-void deleteLinkedList(struct Node *head)
+void deleteLinkedList(Node *head)
 {
     if (head == NULL)
     {
@@ -21,8 +21,8 @@ void deleteLinkedList(struct Node *head)
         exit(-1);
     }
 
-    struct Node *ptr = head;
-    struct Node *nextPtr;
+    Node *ptr = head;
+    Node *nextPtr;
     while(ptr != NULL)
     {
         nextPtr = ptr->next;
@@ -31,7 +31,7 @@ void deleteLinkedList(struct Node *head)
     }
 }
 
-void insertFirst(struct Node *head, int value)
+void insertFirst(Node *head, int value)
 {
     if (head == NULL)
     {
@@ -39,7 +39,7 @@ void insertFirst(struct Node *head, int value)
         exit(-1);
     }
     
-    struct Node *newNode = malloc(1 * sizeof(struct Node));
+    Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
@@ -52,7 +52,7 @@ void insertFirst(struct Node *head, int value)
     head->next = newNode;
 }
 
-void insertAfter(struct Node *head, int value, int offset)
+void insertAfter(Node *head, int value, int offset)
 {
     if (head == NULL)
     {
@@ -66,7 +66,7 @@ void insertAfter(struct Node *head, int value, int offset)
         exit(-1);
     }
 
-    struct Node *ptr = head;
+    Node *ptr = head;
     for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
@@ -78,7 +78,7 @@ void insertAfter(struct Node *head, int value, int offset)
         ptr = ptr->next;
     }
 
-    struct Node *newNode = malloc(1 * sizeof(struct Node));
+    Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
@@ -91,7 +91,7 @@ void insertAfter(struct Node *head, int value, int offset)
     ptr->next = newNode;
 }
 
-void insertLast(struct Node *head, int value)
+void insertLast(Node *head, int value)
 {
     if (head == NULL)
     {
@@ -99,7 +99,7 @@ void insertLast(struct Node *head, int value)
         exit(-1);
     }
 
-    struct Node *newNode = malloc(1 * sizeof(struct Node));
+    Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
@@ -110,7 +110,7 @@ void insertLast(struct Node *head, int value)
     newNode->value = value;
     newNode->next = NULL;
 
-    struct Node *ptr = head;
+    Node *ptr = head;
     while (ptr->next != NULL)
     {
         ptr = ptr->next;
@@ -118,7 +118,7 @@ void insertLast(struct Node *head, int value)
     ptr->next = newNode;
 }
 
-int removeFirst(struct Node *head)
+int removeFirst(Node *head)
 {
     if (head == NULL)
     {
@@ -134,14 +134,14 @@ int removeFirst(struct Node *head)
     }
     
     int value = head->next->value;
-    struct Node *ptr = head->next;
+    Node *ptr = head->next;
     head->next = head->next->next;
     free(ptr);
 
     return value;
 }
 
-int removeAfter(struct Node *head, int offset)
+int removeAfter(Node *head, int offset)
 {
     if (head == NULL)
     {
@@ -163,7 +163,7 @@ int removeAfter(struct Node *head, int offset)
         exit(-1);
     }
 
-    struct Node *ptr = head;
+    Node *ptr = head;
     for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
@@ -175,7 +175,7 @@ int removeAfter(struct Node *head, int offset)
         ptr = ptr->next;
     }
 
-    struct Node *toDelete = ptr->next;
+    Node *toDelete = ptr->next;
     if (toDelete == NULL)
     {
         fprintf(stderr, "ERROR: No element to remove after the given offset!\n");
@@ -190,7 +190,7 @@ int removeAfter(struct Node *head, int offset)
     return value;
 }
 
-int removeLast(struct Node *head)
+int removeLast(Node *head)
 {
     if (head == NULL)
     {
@@ -205,13 +205,13 @@ int removeLast(struct Node *head)
         exit(-1);
     }
 
-    struct Node *ptr = head;
+    Node *ptr = head;
     while (ptr->next->next != NULL)
     {
         ptr = ptr->next;
     }
     
-    struct Node *oldPtr = ptr->next;
+    Node *oldPtr = ptr->next;
     int value = oldPtr->value;
     ptr->next = NULL;
     free(oldPtr);
@@ -219,7 +219,7 @@ int removeLast(struct Node *head)
     return value;
 }
 
-int valueAt(struct Node *head, int offset)
+int valueAt(Node *head, int offset)
 {
     if (head == NULL)
     {
@@ -241,7 +241,7 @@ int valueAt(struct Node *head, int offset)
         exit(-1);
     }
 
-    struct Node *ptr = head;
+    Node *ptr = head;
     for (size_t i = 0; i <= offset; i++)
     {
         if (ptr->next == NULL)
@@ -255,7 +255,7 @@ int valueAt(struct Node *head, int offset)
     return ptr->value;
 }
 
-size_t length(struct Node *head)
+size_t length(Node *head)
 {
     if (head == NULL)
     {
@@ -263,7 +263,7 @@ size_t length(struct Node *head)
         exit(-1);
     }
     
-    struct Node *ptr = head->next;
+    Node *ptr = head->next;
     size_t length = 0;
     while (ptr != NULL)
     {
@@ -274,7 +274,7 @@ size_t length(struct Node *head)
     return length;
 }
 
-void printLinkedList(struct Node *head)
+void printLinkedList(Node *head)
 {
     if (head == NULL)
     {
@@ -288,7 +288,7 @@ void printLinkedList(struct Node *head)
         return;
     }
 
-    struct Node *ptr = head->next;
+    Node *ptr = head->next;
     int counter = 0;
     while (ptr != NULL)
     {

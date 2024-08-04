@@ -1,8 +1,8 @@
 #include "bst.h"
 
-struct TreeNode *initBST(int value)
+TreeNode *initBST(int value)
 {
-    struct TreeNode *root = malloc(1 * sizeof(struct TreeNode));
+    TreeNode *root = (TreeNode *)malloc(sizeof(TreeNode));
     if (root == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Binary Search Tree structure failed!\n");
@@ -16,7 +16,7 @@ struct TreeNode *initBST(int value)
     return root;
 }
 
-void deleteBST(struct TreeNode *root)
+void deleteBST(TreeNode *root)
 {
     if (root == NULL)
     {
@@ -27,7 +27,7 @@ void deleteBST(struct TreeNode *root)
     _deleteNode(root);
 }
 
-void _deleteNode(struct TreeNode *node)
+void _deleteNode(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -39,9 +39,9 @@ void _deleteNode(struct TreeNode *node)
     free(node);
 }
 
-struct TreeNode *insert(struct TreeNode *root, int value)
+TreeNode *insert(TreeNode *root, int value)
 {
-    struct TreeNode *newNode = malloc(1 * sizeof(struct TreeNode));
+    TreeNode *newNode = (TreeNode *)malloc(sizeof(TreeNode));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new TreeNode failed!\n");
@@ -56,7 +56,7 @@ struct TreeNode *insert(struct TreeNode *root, int value)
     return _insertRec(root, value, newNode);
 }
 
-struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *toInsert)
+TreeNode *_insertRec(TreeNode *node, int value, TreeNode *toInsert)
 {
     if (node == NULL)
     {
@@ -75,7 +75,7 @@ struct TreeNode *_insertRec(struct TreeNode *node, int value, struct TreeNode *t
     return node;
 }
 
-struct TreeNode *removeBST(struct TreeNode *root, int value)
+TreeNode *removeBST(TreeNode *root, int value)
 {
     if (root == NULL)
     {
@@ -86,7 +86,7 @@ struct TreeNode *removeBST(struct TreeNode *root, int value)
     return _removeRec(root, value);
 }
 
-struct TreeNode *_removeRec(struct TreeNode *node, int value)
+TreeNode *_removeRec(TreeNode *node, int value)
 {
     if (node == NULL)
     {
@@ -111,7 +111,7 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value)
         }
         else if (_childCount == 1)
         {
-            struct TreeNode *temp;
+            TreeNode *temp;
 
             temp = node->left != NULL ? node->left : node->right;
 
@@ -120,7 +120,7 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value)
         }
         else
         {
-            struct TreeNode *temp = _findMin(node->right);
+            TreeNode *temp = _findMin(node->right);
             node->key = temp->key;
             node->right = _removeRec(node->right, temp->key);
         }
@@ -129,7 +129,7 @@ struct TreeNode *_removeRec(struct TreeNode *node, int value)
     return node;
 }
 
-struct TreeNode *_findMin(struct TreeNode *node)
+TreeNode *_findMin(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -144,7 +144,7 @@ struct TreeNode *_findMin(struct TreeNode *node)
     return node;
 }
 
-struct TreeNode *search(struct TreeNode *root, int target)
+TreeNode *search(TreeNode *root, int target)
 {
     if (root == NULL)
     {
@@ -166,7 +166,7 @@ struct TreeNode *search(struct TreeNode *root, int target)
     }
 }
 
-int childCount(struct TreeNode *node)
+int childCount(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -186,7 +186,7 @@ int childCount(struct TreeNode *node)
     return count;
 }
 
-void preOrderPrint(struct TreeNode *node)
+void preOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -198,7 +198,7 @@ void preOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _preOrderPrintRec(struct TreeNode *node)
+void _preOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -210,7 +210,7 @@ void _preOrderPrintRec(struct TreeNode *node)
     _preOrderPrintRec(node->right);
 }
 
-void postOrderPrint(struct TreeNode *node)
+void postOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -222,7 +222,7 @@ void postOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _postOrderPrintRec(struct TreeNode *node)
+void _postOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -234,7 +234,7 @@ void _postOrderPrintRec(struct TreeNode *node)
     printf("%d ", node->key);
 }
 
-void inOrderPrint(struct TreeNode *node)
+void inOrderPrint(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -246,7 +246,7 @@ void inOrderPrint(struct TreeNode *node)
     printf("\n");
 }
 
-void _inOrderPrintRec(struct TreeNode *node)
+void _inOrderPrintRec(TreeNode *node)
 {
     if (node == NULL)
     {

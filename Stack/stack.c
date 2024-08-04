@@ -1,8 +1,8 @@
 #include "stack.h"
 
-struct Stack *initStack()
+Stack *initStack()
 {
-    struct Stack *stack = malloc(1 * sizeof(struct Stack));
+    Stack *stack = (Stack *)malloc(sizeof(Stack));
     if (stack == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Stack structure failed!\n");
@@ -11,7 +11,7 @@ struct Stack *initStack()
 
     int size = STACK_INCREMENT_SIZE;
 
-    stack->data = malloc(size * sizeof(int));
+    stack->data = (int *)malloc(size * sizeof(int));
     if (stack->data == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Stack data failed!\n");
@@ -24,7 +24,7 @@ struct Stack *initStack()
     return stack;
 }
 
-void deleteStack(struct Stack *stack)
+void deleteStack(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -41,7 +41,7 @@ void deleteStack(struct Stack *stack)
     free(stack);
 }
 
-void push(struct Stack *stack, int value)
+void push(Stack *stack, int value)
 {
     if (stack == NULL)
     {
@@ -52,7 +52,7 @@ void push(struct Stack *stack, int value)
     if (isFull(stack))
     {
         int size = STACK_INCREMENT_SIZE;
-        int *temp = realloc(stack->data, (stack->maxHeight + size) * sizeof(int));
+        int *temp = (int *)realloc(stack->data, (stack->maxHeight + size) * sizeof(int));
         if (temp == NULL)
         {
             fprintf(stderr, "ERROR: Memory reallocation failed!\n");
@@ -66,7 +66,7 @@ void push(struct Stack *stack, int value)
     stack->data[stack->currentSize++] = value;
 }
 
-int pop(struct Stack *stack)
+int pop(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -84,7 +84,7 @@ int pop(struct Stack *stack)
     return stack->data[--stack->currentSize];
 }
 
-int top(struct Stack *stack)
+int top(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -102,7 +102,7 @@ int top(struct Stack *stack)
     return stack->data[stack->currentSize - 1];
 }
 
-int isFull(struct Stack *stack)
+int isFull(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -113,7 +113,7 @@ int isFull(struct Stack *stack)
     return stack->currentSize == stack->maxHeight;
 }
 
-int isEmpty(struct Stack *stack)
+int isEmpty(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -124,7 +124,7 @@ int isEmpty(struct Stack *stack)
     return stack->currentSize == 0;
 }
 
-void setEmpty(struct Stack *stack)
+void setEmpty(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -135,7 +135,7 @@ void setEmpty(struct Stack *stack)
     stack->currentSize = 0;
 }
 
-size_t length(struct Stack *stack)
+size_t length(Stack *stack)
 {
     if (stack == NULL)
     {
@@ -146,7 +146,7 @@ size_t length(struct Stack *stack)
     return stack->currentSize;
 }
 
-void printStack(struct Stack *stack)
+void printStack(Stack *stack)
 {
     if (stack == NULL)
     {

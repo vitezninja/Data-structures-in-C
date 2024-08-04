@@ -5,32 +5,32 @@
 
 #define QUEUE_INCREMENT_SIZE 10;
 
-struct Queue
+typedef struct Queue
 {
     int *data;
     int start;
     int size;
     int maxLength;
-};
+} Queue;
 
-struct Queue *initQueue();
+Queue *initQueue();
 
-void deleteQueue(struct Queue *queue);
+void deleteQueue(Queue *queue);
 
-void enqueue(struct Queue *queue, int value);
+void enqueue(Queue *queue, int value);
 
-int dequeue(struct Queue *queue);
+int dequeue(Queue *queue);
 
-int peek(struct Queue *queue);
+int peek(Queue *queue);
 
-int isFull(struct Queue *queue);
+int isFull(Queue *queue);
 
-int isEmpty(struct Queue *queue);
+int isEmpty(Queue *queue);
 
-void setEmpty(struct Queue *queue);
+void setEmpty(Queue *queue);
 
-size_t length(struct Queue *queue);
+size_t length(Queue *queue);
 
-void printQueue(struct Queue *queue);
+void printQueue(Queue *queue);
 
 #endif

@@ -1,8 +1,8 @@
 #include "queue.h"
 
-struct Queue *initQueue()
+Queue *initQueue()
 {
-    struct Queue *queue = malloc(1 * sizeof(struct Queue));
+    Queue *queue = (Queue *)malloc(sizeof(Queue));
     if (queue == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Queue structure failed!\n");
@@ -10,7 +10,7 @@ struct Queue *initQueue()
     }
 
     int size = QUEUE_INCREMENT_SIZE;
-    queue->data = malloc(size * sizeof(int));
+    queue->data = (int *)malloc(size * sizeof(int));
     if (queue->data == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Queue data failed!\n");
@@ -24,7 +24,7 @@ struct Queue *initQueue()
     return queue;
 }
 
-void deleteQueue(struct Queue *queue)
+void deleteQueue(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -39,7 +39,7 @@ void deleteQueue(struct Queue *queue)
     free(queue);
 }
 
-void enqueue(struct Queue *queue, int value)
+void enqueue(Queue *queue, int value)
 {
     if (queue == NULL)
     {
@@ -50,7 +50,7 @@ void enqueue(struct Queue *queue, int value)
     if (isFull(queue))
     {
         int size = QUEUE_INCREMENT_SIZE;
-        int *temp = malloc((queue->maxLength + size) * sizeof(int));
+        int *temp = (int *)malloc((queue->maxLength + size) * sizeof(int));
         if (temp == NULL)
         {
             fprintf(stderr, "ERROR: Memory allocation failed!\n");
@@ -76,7 +76,7 @@ void enqueue(struct Queue *queue, int value)
     queue->size++;
 }
 
-int dequeue(struct Queue *queue)
+int dequeue(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -98,7 +98,7 @@ int dequeue(struct Queue *queue)
     return value;
 }
 
-int peek(struct Queue *queue)
+int peek(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -116,7 +116,7 @@ int peek(struct Queue *queue)
     return queue->data[queue->start];
 }
 
-int isFull(struct Queue *queue)
+int isFull(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -127,7 +127,7 @@ int isFull(struct Queue *queue)
     return queue->size == queue->maxLength;
 }
 
-int isEmpty(struct Queue *queue)
+int isEmpty(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -138,7 +138,7 @@ int isEmpty(struct Queue *queue)
     return queue->size == 0;
 }
 
-void setEmpty(struct Queue *queue)
+void setEmpty(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -150,7 +150,7 @@ void setEmpty(struct Queue *queue)
     queue->size = 0;
 }
 
-size_t length(struct Queue *queue)
+size_t length(Queue *queue)
 {
     if (queue == NULL)
     {
@@ -161,7 +161,7 @@ size_t length(struct Queue *queue)
     return queue->size;
 }
 
-void printQueue(struct Queue *queue)
+void printQueue(Queue *queue)
 {
     if (queue == NULL)
     {
