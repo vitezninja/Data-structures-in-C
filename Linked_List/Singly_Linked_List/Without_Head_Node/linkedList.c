@@ -13,6 +13,7 @@ LinkedList *initLinkedList(int value)
     if (head == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Linked List head failed!\n");
+        free(linkedList);
         exit(-1);
     }
 
@@ -26,7 +27,7 @@ LinkedList *initLinkedList(int value)
 
 void deleteLinkedList(LinkedList *linkedList)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);

@@ -13,6 +13,7 @@ LinkedList *initLinkedList()
     if (head == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Linked List head failed!\n");
+        free(linkedList);
         exit(-1);
     }
 
@@ -26,7 +27,7 @@ LinkedList *initLinkedList()
 
 void deleteLinkedList(LinkedList *linkedList)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);
@@ -46,9 +47,16 @@ void deleteLinkedList(LinkedList *linkedList)
 
 void insert(LinkedList *linkedList, int value)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
         exit(-1);
     }
     
@@ -72,9 +80,16 @@ void insert(LinkedList *linkedList, int value)
 
 void removeLL(LinkedList *linkedList)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
@@ -95,9 +110,16 @@ void removeLL(LinkedList *linkedList)
 
 int valueAt(LinkedList *linkedList, int offset)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
@@ -139,9 +161,16 @@ int valueAt(LinkedList *linkedList, int offset)
 
 size_t length(LinkedList *linkedList)
 {
-    if (linkedList == NULL || linkedList->head == NULL)
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
@@ -167,8 +196,8 @@ void printLinkedList(LinkedList *linkedList)
 
     if (linkedList->head == NULL)
     {
-        free(linkedList);
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
