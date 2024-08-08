@@ -9,18 +9,23 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-Node *initLinkedList(int value);
+typedef struct LinkedList
+{
+    Node *head;
+} LinkedList;
 
-void deleteLinkedList(Node *head);
+LinkedList *initLinkedList(int value);
 
-Node *insert(Node *head, int value);
+void deleteLinkedList(LinkedList *linkedList);
 
-Node *removeLL(Node *head);
+void insert(LinkedList *linkedList, int value);
 
-int valueAt(Node *head, int offset);
+void removeLL(LinkedList *linkedList);
 
-size_t length(Node *head);
+int valueAt(LinkedList *linkedList, int offset);
 
-void printLinkedList(Node *head);
+size_t length(LinkedList *linkedList);
+
+void printLinkedList(LinkedList *linkedList);
 
 #endif

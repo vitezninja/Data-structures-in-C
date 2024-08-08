@@ -47,6 +47,12 @@ void deleteLinkedList(LinkedList *linkedList)
 
 void insert(LinkedList *linkedList, int value)
 {
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+    
     Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {

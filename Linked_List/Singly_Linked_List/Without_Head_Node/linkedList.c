@@ -1,28 +1,38 @@
 #include "linkedList.h"
 
-Node *initLinkedList(int value)
+LinkedList *initLinkedList(int value)
 {
-    Node *head = (Node *)malloc(sizeof(Node));
-    if (head == NULL)
+    LinkedList *linkedList = (LinkedList *)malloc(sizeof(LinkedList));
+    if (linkedList == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for Linked List structure failed!\n");
         exit(-1);
     }
 
+    Node *head = (Node *)malloc(sizeof(Node));
+    if (head == NULL)
+    {
+        fprintf(stderr, "ERROR: Memory allocation for Linked List head failed!\n");
+        exit(-1);
+    }
+
     head->value = value;
     head->next = NULL;
-    return head;
+    
+    linkedList->head = head;
+
+    return linkedList;
 }
 
-void deleteLinkedList(Node *head)
+void deleteLinkedList(LinkedList *linkedList)
 {
-    if (head == NULL)
+    if (linkedList == NULL || linkedList->head == NULL)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);
     }
 
-    Node *ptr = head;
+    Node *ptr = linkedList->head;
     Node *nextPtr;
     while(ptr != NULL)
     {
@@ -30,56 +40,73 @@ void deleteLinkedList(Node *head)
         free(ptr);
         ptr = nextPtr;
     }
+    free(linkedList);
 }
 
-Node *insert(Node *head, int value)
+void insert(LinkedList *linkedList, int value)
 {
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
     Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL)
     {
         fprintf(stderr, "ERROR: Memory allocation for new Node failed!\n");
-        deleteLinkedList(head);
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
     newNode->value = value;
-    newNode->next = head;
+    newNode->next = linkedList->head;
 
-    return newNode;
+    linkedList->head = newNode;
 }
 
-Node *removeLL(Node *head)
+void removeLL(LinkedList *linkedList)
 {
-    if (head == NULL)
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
     {
         printf("No elements in the Linked List!\n");
-        return head;
+        return;
     }
     
-    Node *ptr = head;
-    head = head->next;
+    Node *ptr = linkedList->head;
+    linkedList->head = linkedList->head->next;
     free(ptr);
-
-    return head;
 }
 
-int valueAt(Node *head, int offset)
+int valueAt(LinkedList *linkedList, int offset)
 {
-    if (head == NULL)
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
     {
         fprintf(stderr, "ERROR: No elements in the Linked List!\n");
-        deleteLinkedList(head);
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
     if (offset < 0)
     {
         fprintf(stderr, "ERROR: Index out of bound!\n");
-        deleteLinkedList(head);
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
-    Node *ptr = head;
+    Node *ptr = linkedList->head;
     int counter = 0;
     while (ptr != NULL)
     {
@@ -94,21 +121,22 @@ int valueAt(Node *head, int offset)
     if (ptr == NULL)
     {
         fprintf(stderr, "ERROR: Index out of bound!\n");
-        deleteLinkedList(head);
+        deleteLinkedList(linkedList);
         exit(-1);
     }
 
     return ptr->value;
 }
 
-size_t length(Node *head)
+size_t length(LinkedList *linkedList)
 {
-    if (head == NULL)
+    if (linkedList == NULL)
     {
-        return 0;
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
     }
-    
-    Node *ptr = head;
+
+    Node *ptr = linkedList->head;
     size_t length = 0;
     while (ptr != NULL)
     {
@@ -119,16 +147,22 @@ size_t length(Node *head)
     return length;
 }
 
-void printLinkedList(Node *head)
+void printLinkedList(LinkedList *linkedList)
 {
-    if (head == NULL)
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
     {
         printf("The Linked List was empty!\n");
         return;
     }
 
     printf("head");
-    Node *ptr = head;
+    Node *ptr = linkedList->head;
     while (ptr != NULL)
     {
         printf(" -> %d", ptr->value);

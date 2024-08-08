@@ -3,7 +3,7 @@
 
 void main()
 {
-    struct Node *linkedList = initLinkedList();
+    LinkedList *linkedList = initLinkedList();
 
     insert(linkedList, 1);
     insert(linkedList, 5);
