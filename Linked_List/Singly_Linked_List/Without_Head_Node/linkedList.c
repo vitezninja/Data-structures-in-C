@@ -91,7 +91,7 @@ int valueAt(Node *head, int offset)
         counter++;
     }
 
-    if (ptr == NULL || counter > offset)
+    if (ptr == NULL)
     {
         fprintf(stderr, "ERROR: Index out of bound!\n");
         deleteLinkedList(head);

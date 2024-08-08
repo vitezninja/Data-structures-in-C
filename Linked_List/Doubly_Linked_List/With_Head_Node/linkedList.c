@@ -54,8 +54,8 @@ void insert(Node *head, int value)
     }
 
     newNode->value = value;
-    newNode->next = head->next;
     newNode->previous = head;
+    newNode->next = head->next;
     head->next = newNode;
 }
 
@@ -107,17 +107,25 @@ int valueAt(Node *head, int offset)
         exit(-1);
     }
 
-    Node *ptr = head;
-    for (size_t i = 0; i <= offset; i++)
+    Node *ptr = head->next;
+    int counter = 0;
+    while (ptr != NULL)
     {
-        if (ptr->next == NULL)
+        if (counter == offset)
         {
-            fprintf(stderr, "ERROR: Index out of bound!\n");
-            deleteLinkedList(head);
-            exit(-1);
+            break;
         }
         ptr = ptr->next;
+        counter++;
     }
+
+    if (ptr == NULL)
+    {
+        fprintf(stderr, "ERROR: Index out of bound!\n");
+        deleteLinkedList(head);
+        exit(-1);
+    }
+
     return ptr->value;
 }
 
