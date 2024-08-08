@@ -56,7 +56,6 @@ Node *removeLL(Node *head)
         return head;
     }
     
-    int value = head->value;
     Node *ptr = head;
     head = head->next;
     free(ptr);
