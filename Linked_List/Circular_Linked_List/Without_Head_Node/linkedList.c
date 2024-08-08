@@ -83,7 +83,14 @@ void removeLL(LinkedList *linkedList)
     }
     
     Node *ptr = linkedList->head;
-    linkedList->head = linkedList->head->next;
+    if (linkedList->head == linkedList->head->next)
+    {
+        linkedList->head = NULL;
+    }
+    else
+    {
+        linkedList->head = linkedList->head->next;
+    }
     linkedList->last->next = linkedList->head;
     free(ptr);
 }
@@ -138,11 +145,6 @@ size_t length(LinkedList *linkedList)
     {
         fprintf(stderr, "ERROR: Linked List is not initialized!\n");
         exit(-1);
-    }
-
-    if (linkedList->head == NULL)
-    {
-        return 0;
     }
     
     Node *ptr = linkedList->head;
