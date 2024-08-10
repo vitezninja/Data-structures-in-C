@@ -64,7 +64,11 @@ void insert(LinkedList *linkedList, int value)
     newNode->value = value;
     newNode->previous = NULL;
     newNode->next = linkedList->head;
-    linkedList->head->previous = newNode;
+    //If the Linked List is empty head is NULL
+    if (linkedList->head != NULL)
+    {
+        linkedList->head->previous = newNode;
+    }
 
     linkedList->head = newNode;
 }
@@ -85,7 +89,12 @@ void removeLL(LinkedList *linkedList)
     
     Node *ptr = linkedList->head;
     linkedList->head = linkedList->head->next;
-    linkedList->head->previous = NULL;
+    //If the Linked List is only had 1 element then after removal head is NULL
+    if (linkedList->head != NULL)
+    {
+        linkedList->head->previous = NULL;
+    }
+    
     free(ptr);
 }
 
