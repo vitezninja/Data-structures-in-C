@@ -52,6 +52,7 @@ void enqueue(Queue *queue, int value)
     }
 
     newNode->value = value;
+    //If the Queue is empty head is NULL
     if (queue->head == NULL)
     {
         newNode->previous = newNode;
@@ -63,7 +64,6 @@ void enqueue(Queue *queue, int value)
 
     newNode->previous = queue->last;
     newNode->next = queue->head;
-
     queue->head->previous = newNode;
     queue->head = newNode;
     queue->last->next = queue->head;
@@ -84,8 +84,8 @@ int dequeue(Queue *queue)
     }
     
     Node *ptr = queue->last;
-    queue->last->previous->next = queue->head;
     queue->last = queue->last->previous;
+    queue->last->next = queue->head;
     queue->head->previous = queue->last;
 
     int value = ptr->value;
