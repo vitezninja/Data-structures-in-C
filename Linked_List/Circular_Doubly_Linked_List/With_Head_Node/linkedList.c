@@ -97,7 +97,7 @@ void removeLL(LinkedList *linkedList)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         printf("No elements in the Linked List!\n");
         return;
@@ -129,7 +129,7 @@ int valueAt(LinkedList *linkedList, int index)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         fprintf(stderr, "ERROR: No elements in the Linked List!\n");
         deleteLinkedList(linkedList);
@@ -207,7 +207,7 @@ void print(LinkedList *linkedList)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         printf("The Linked List was empty!\n");
         return;
@@ -240,7 +240,7 @@ void debug(LinkedList *linkedList)
         exit(-1);
     }
 
-    if (linkedList->head->next == NULL)
+    if (linkedList->head == linkedList->last)
     {
         printf("The Linked List was empty!\n");
         return;
