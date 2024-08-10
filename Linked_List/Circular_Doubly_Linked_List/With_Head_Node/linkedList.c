@@ -73,13 +73,14 @@ void insert(LinkedList *linkedList, int value)
     newNode->previous = linkedList->head;
     newNode->next = linkedList->head->next;
 
+    //If the Linked List is empty head and last are equal
+    if (linkedList->head == linkedList->last)
+    {
+        linkedList->last = newNode;
+        linkedList->head->previous = newNode;
+    }
     linkedList->head->next->previous = newNode;
     linkedList->head->next = newNode;
-    if (linkedList->last == linkedList->head)
-    {
-        linkedList->last = linkedList->head->next;
-        linkedList->head->previous = linkedList->last;
-    }
 }
 
 void removeLL(LinkedList *linkedList)
@@ -105,12 +106,13 @@ void removeLL(LinkedList *linkedList)
     
     Node *ptr = linkedList->head->next;
     linkedList->head->next = linkedList->head->next->next;
-
+    //If the Linked List only had 1 element (exluding head element) then after removal head and head->next are equal but last need t updata
     if (linkedList->head == linkedList->head->next)
     {
         linkedList->last = linkedList->head;
-        linkedList->head->previous = linkedList->head;
+        linkedList->head->previous = linkedList->last;
     }
+    linkedList->head->next->previous = linkedList->head;
     free(ptr);
 }
 

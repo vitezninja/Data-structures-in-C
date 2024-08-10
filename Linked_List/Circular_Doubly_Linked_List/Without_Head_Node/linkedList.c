@@ -64,6 +64,7 @@ void insert(LinkedList *linkedList, int value)
     }
 
     newNode->value = value;
+    //If the Linked List is empty head is NULL
     if (linkedList->head == NULL)
     {
         newNode->previous = newNode;
@@ -75,7 +76,6 @@ void insert(LinkedList *linkedList, int value)
 
     newNode->previous = linkedList->last;
     newNode->next = linkedList->head;
-
     linkedList->head->previous = newNode;
     linkedList->head = newNode;
     linkedList->last->next = linkedList->head;
@@ -97,6 +97,7 @@ void removeLL(LinkedList *linkedList)
     
 
     Node *ptr = linkedList->head;
+    //If the Linked List only had 1 element then head and head->next are equal
     if (linkedList->head == linkedList->head->next)
     {
         linkedList->head = NULL;
@@ -109,7 +110,6 @@ void removeLL(LinkedList *linkedList)
     linkedList->head->previous = linkedList->last;
     linkedList->last->next = linkedList->head;
     free(ptr);
-    
 }
 
 int valueAt(LinkedList *linkedList, int index)

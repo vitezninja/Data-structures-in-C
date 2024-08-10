@@ -71,11 +71,12 @@ void insert(LinkedList *linkedList, int value)
     newNode->value = value;
     newNode->next = linkedList->head->next;
 
-    linkedList->head->next = newNode;
+    //If the Linked List is empty head and last are equal
     if (linkedList->last == linkedList->head)
     {
-        linkedList->last = linkedList->head->next;
+        linkedList->last = newNode;
     }
+    linkedList->head->next = newNode;
 }
 
 void removeLL(LinkedList *linkedList)
@@ -93,7 +94,7 @@ void removeLL(LinkedList *linkedList)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         printf("No elements in the Linked List!\n");
         return;
@@ -101,6 +102,7 @@ void removeLL(LinkedList *linkedList)
     
     Node *ptr = linkedList->head->next;
     linkedList->head->next = linkedList->head->next->next;
+    //If the Linked List only had 1 element (exluding head element) then after removal head and head->next are equal but last need t updata
     if (linkedList->head == linkedList->head->next)
     {
         linkedList->last = linkedList->head;
@@ -123,7 +125,7 @@ int valueAt(LinkedList *linkedList, int index)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         fprintf(stderr, "ERROR: No elements in the Linked List!\n");
         deleteLinkedList(linkedList);
@@ -201,7 +203,7 @@ void print(LinkedList *linkedList)
         exit(-1);
     }
 
-    if (linkedList->head->next == linkedList->head)
+    if (linkedList->head == linkedList->last)
     {
         printf("The Linked List was empty!\n");
         return;

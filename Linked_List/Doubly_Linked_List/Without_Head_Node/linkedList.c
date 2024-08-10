@@ -89,7 +89,7 @@ void removeLL(LinkedList *linkedList)
     
     Node *ptr = linkedList->head;
     linkedList->head = linkedList->head->next;
-    //If the Linked List is only had 1 element then after removal head is NULL
+    //If the Linked List only had 1 element then after removal head is NULL
     if (linkedList->head != NULL)
     {
         linkedList->head->previous = NULL;
