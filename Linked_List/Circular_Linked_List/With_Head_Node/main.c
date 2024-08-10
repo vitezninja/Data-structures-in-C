@@ -24,6 +24,7 @@ void main()
     print(linkedList);
     removeLL(linkedList);
     print(linkedList);
+    debug(linkedList);
     removeLL(linkedList);
     removeLL(linkedList);
     removeLL(linkedList);

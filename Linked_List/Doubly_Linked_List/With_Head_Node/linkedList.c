@@ -67,14 +67,14 @@ void insert(LinkedList *linkedList, int value)
         exit(-1);
     }
 
+    newNode->value = value;
+    newNode->previous = linkedList->head;
+    newNode->next = linkedList->head->next;
+
     if (linkedList->head->next != NULL)
     {
         linkedList->head->next->previous = newNode;
     }
-
-    newNode->value = value;
-    newNode->previous = linkedList->head;
-    newNode->next = linkedList->head->next;
     linkedList->head->next = newNode;
 }
 
@@ -107,7 +107,6 @@ void removeLL(LinkedList *linkedList)
     {
         linkedList->head->next->previous = linkedList->head;
     }
-
     free(ptr);
 }
 
