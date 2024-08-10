@@ -26,12 +26,6 @@ int dequeue(Queue *queue);
 
 int peek(Queue *queue);
 
-int isFull(Queue *queue);
-
-int isEmpty(Queue *queue);
-
-void setEmpty(Queue *queue);
-
 size_t length(Queue *queue);
 
 void print(Queue *queue);
