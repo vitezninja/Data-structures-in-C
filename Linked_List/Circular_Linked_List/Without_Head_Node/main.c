@@ -5,6 +5,7 @@ void main()
 {
     LinkedList *linkedList = initLinkedList(1);
 
+    removeLL(linkedList);
     insert(linkedList, 5);
     insert(linkedList, 10);
     insert(linkedList, 20);
