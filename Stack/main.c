@@ -18,29 +18,29 @@ void main()
     push(stack, 9);
     push(stack, 10);
     push(stack, 11);
-    printStack(stack);
+    print(stack);
     printf("Length: %ld\n", length(stack));
     setEmpty(stack);
     push(stack, 12);
     push(stack, 13);
     push(stack, 14);
     push(stack, 15);
-    printStack(stack);
+    print(stack);
     printf("Length: %ld\n", length(stack));
     printf("Value at top: %d\n", top(stack));
     
     int value = pop(stack);
     printf("Removed: %d\n", value);
-    printStack(stack);
+    print(stack);
     value = pop(stack);
     printf("Removed: %d\n", value);
-    printStack(stack);
+    print(stack);
     value = pop(stack);
     printf("Removed: %d\n", value);
-    printStack(stack);
+    print(stack);
     value = pop(stack);
     printf("Removed: %d\n", value);
-    printStack(stack);
+    print(stack);
 
     deleteStack(stack);
 }

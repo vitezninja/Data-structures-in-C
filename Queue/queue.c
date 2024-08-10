@@ -161,7 +161,7 @@ size_t length(Queue *queue)
     return queue->size;
 }
 
-void printQueue(Queue *queue)
+void print(Queue *queue)
 {
     if (queue == NULL)
     {

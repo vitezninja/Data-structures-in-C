@@ -36,15 +36,15 @@ void main()
     enqueue(queue, 17);
     enqueue(queue, 18);
 
-    printQueue(queue);
+    print(queue);
     printf("Length: %ld\n", length(queue));
     dequeue(queue);
-    printQueue(queue);
+    print(queue);
     printf("Length: %ld\n", length(queue));
     enqueue(queue, 19);
     enqueue(queue, 20);
 
-    printQueue(queue);
+    print(queue);
     printf("Length: %ld\n", length(queue));
     printf("isEmpty: %d\n", isEmpty(queue));
     printf("isFull: %d\n", isFull(queue));
@@ -53,22 +53,22 @@ void main()
     enqueue(queue, 13);
     enqueue(queue, 14);
     enqueue(queue, 15);
-    printQueue(queue);
+    print(queue);
     printf("Length: %ld\n", length(queue));
     printf("Next value: %d\n", peek(queue));
     
     int value = dequeue(queue);
     printf("Removed: %d\n", value);
-    printQueue(queue);
+    print(queue);
     value = dequeue(queue);
     printf("Removed: %d\n", value);
-    printQueue(queue);
+    print(queue);
     value = dequeue(queue);
     printf("Removed: %d\n", value);
-    printQueue(queue);
+    print(queue);
     value = dequeue(queue);
     printf("Removed: %d\n", value);
-    printQueue(queue);
+    print(queue);
 
     deleteQueue(queue);
 }

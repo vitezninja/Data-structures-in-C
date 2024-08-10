@@ -146,7 +146,7 @@ size_t length(Stack *stack)
     return stack->currentSize;
 }
 
-void printStack(Stack *stack)
+void print(Stack *stack)
 {
     if (stack == NULL)
     {

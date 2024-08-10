@@ -111,7 +111,7 @@ void removeLL(LinkedList *linkedList)
     free(ptr);
 }
 
-int valueAt(LinkedList *linkedList, int offset)
+int valueAt(LinkedList *linkedList, int index)
 {
     if (linkedList == NULL)
     {
@@ -133,7 +133,7 @@ int valueAt(LinkedList *linkedList, int offset)
         exit(-1);
     }
 
-    if (offset < 0)
+    if (index < 0)
     {
         fprintf(stderr, "ERROR: Index out of bound!\n");
         deleteLinkedList(linkedList);
@@ -144,7 +144,7 @@ int valueAt(LinkedList *linkedList, int offset)
     int counter = 0;
     while (ptr != NULL)
     {
-        if (counter == offset)
+        if (counter == index)
         {
             break;
         }
@@ -188,7 +188,7 @@ size_t length(LinkedList *linkedList)
     return length;
 }
 
-void printLinkedList(LinkedList *linkedList)
+void print(LinkedList *linkedList)
 {
     if (linkedList == NULL)
     {
@@ -218,4 +218,59 @@ void printLinkedList(LinkedList *linkedList)
         ptr = ptr->next;
     }
     printf("\n");
+}
+
+void debug(LinkedList *linkedList)
+{
+    if (linkedList == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        exit(-1);
+    }
+
+    if (linkedList->head == NULL)
+    {
+        fprintf(stderr, "ERROR: Linked List is not initialized!\n");
+        deleteLinkedList(linkedList);
+        exit(-1);
+    }
+
+    if (linkedList->head->next == NULL)
+    {
+        printf("The Linked List was empty!\n");
+        return;
+    }
+
+    int index = 0;
+    Node *ptr = linkedList->head->next;
+    printf("head:\n");
+    printf("address: %d, ", linkedList->head);
+    printf("value: NULL, ");
+    printf("previous address: NULL ");
+    printf("next address: %d\n", linkedList->head->next);
+    while (ptr != NULL)
+    {   
+        printf("%d. index:\n", index);
+        printf("address: %d, ", ptr);
+        printf("value: %d, ", ptr->value);
+        if (ptr->previous == NULL)
+        {
+            printf("previous address: NULL ");
+        }
+        else
+        {
+            printf("previous address: %d ", ptr->previous);
+        }
+
+        if (ptr->next == NULL)
+        {
+            printf("next address: NULL\n");
+        }
+        else
+        {
+            printf("next address: %d\n", ptr->next);
+        }
+        ptr = ptr->next;
+        index++;
+    }
 }

@@ -31,6 +31,6 @@ void setEmpty(Queue *queue);
 
 size_t length(Queue *queue);
 
-void printQueue(Queue *queue);
+void print(Queue *queue);
 
 #endif

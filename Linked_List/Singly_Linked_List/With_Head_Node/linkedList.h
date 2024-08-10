@@ -22,10 +22,12 @@ void insert(LinkedList *linkedList, int value);
 
 void removeLL(LinkedList *linkedList);
 
-int valueAt(LinkedList *linkedList, int offset);
+int valueAt(LinkedList *linkedList, int index);
 
 size_t length(LinkedList *linkedList);
 
-void printLinkedList(LinkedList *linkedList);
+void print(LinkedList *linkedList);
+
+void debug(LinkedList *linkedList);
 
 #endif

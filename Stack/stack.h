@@ -30,6 +30,6 @@ void setEmpty(Stack *stack);
 
 size_t length(Stack *stack);
 
-void printStack(Stack *stack);
+void print(Stack *stack);
 
 #endif

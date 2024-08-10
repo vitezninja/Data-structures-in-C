@@ -12,17 +12,18 @@ void main()
     insert(linkedList, 30);
     insert(linkedList, 100);
     insert(linkedList, 40);
-    printLinkedList(linkedList);
+    print(linkedList);
+    debug(linkedList);
     printf("Length: %ld\n", length(linkedList));
     int index = 5;
     printf("Value at %d. index: %d\n", index, valueAt(linkedList, index));
     
     removeLL(linkedList);
-    printLinkedList(linkedList);
+    print(linkedList);
     removeLL(linkedList);
-    printLinkedList(linkedList);
+    print(linkedList);
     removeLL(linkedList);
-    printLinkedList(linkedList);
+    print(linkedList);
 
     deleteLinkedList(linkedList);
 }
