@@ -14,18 +14,16 @@ typedef struct Stack
 } Stack;
 
 #define initStack(__type) ({ \
-    Stack *__ret; \
+    Stack *__ret = (Stack *)NULL; \
     Stack* __stack = (Stack *)malloc(sizeof(Stack)); \
     if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Memory allocation for Stack structure failed!\n"); \
-        __ret = (Stack *)NULL; \
     } \
     else { \
         __stack->data = malloc(STACK_INCREMENT_SIZE * sizeof(__type)); \
         if (__stack->data == NULL) { \
             fprintf(stderr, "ERROR: Memory allocation for Stack data failed!\n"); \
             free(__stack); \
-            __ret = (Stack *)NULL; \
         } \
         else { \
             __stack->currentSize = 0; \
@@ -50,14 +48,12 @@ typedef struct Stack
 })
 
 #define push(__stack, __value) ({ \
-    int __ret; \
+    int __ret = 0; \
     if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = 0; \
     } \
     else if (__stack->elementSize != sizeof(__value)) { \
         fprintf(stderr, "ERROR: Type mismatch!\n"); \
-        __ret = 0; \
     } \
     else { \
         if (isFull(__stack) > 0) { \
@@ -66,7 +62,6 @@ typedef struct Stack
             if (__temp == NULL) { \
                 fprintf(stderr, "ERROR: Memory reallocation failed!\n"); \
                 deleteStack(__stack); \
-                __ret = 0; \
             } \
             else { \
                 __stack->data = __temp; \
@@ -84,20 +79,15 @@ typedef struct Stack
 })
 
 #define pop(__stack, __type) ({ \
-    __type __ret; \
+    __type __ret = (__type)NULL;; \
     if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = (__type)NULL; \
     } \
     else if (__stack->elementSize != sizeof(__type)) { \
         fprintf(stderr, "ERROR: Type mismatch!\n"); \
-        __ret = (__type)NULL; \
     } \
     else { \
-        if (isEmpty(__stack) > 0) { \
-            __ret = (__type)NULL; \
-        } \
-        else { \
+        if (isEmpty(__stack) == 0) { \
             __ret = ((__type *)__stack->data)[--__stack->currentSize]; \
         } \
     } \
@@ -105,21 +95,15 @@ typedef struct Stack
 })
 
 #define top(__stack, __type) ({ \
-    __type __ret; \
+    __type __ret = (__type)NULL; \
     if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = (__type)NULL; \
     } \
     else if (__stack->elementSize != sizeof(__type)) { \
         fprintf(stderr, "ERROR: Type mismatch!\n"); \
-        __ret = (__type)NULL; \
     } \
     else { \
-        if (isEmpty(__stack) > 0) \
-        { \
-            __ret = (__type)NULL; \
-        } \
-        else { \
+        if (isEmpty(__stack) == 0) { \
             __ret = ((__type *)__stack->data)[__stack->currentSize - 1]; \
         } \
     } \
@@ -127,11 +111,9 @@ typedef struct Stack
 })
 
 #define isFull(__stack) ({ \
-    int __ret; \
-    if (__stack == NULL) \
-    { \
+    int __ret = 0; \
+    if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = 0; \
     } \
     else { \
         __ret = __stack->currentSize == __stack->maxHeight; \
@@ -140,11 +122,9 @@ typedef struct Stack
 })
 
 #define isEmpty(__stack) ({ \
-    int __ret; \
-    if (__stack == NULL) \
-    { \
+    int __ret = 0; \
+    if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = 0; \
     } \
     else { \
         __ret = __stack->currentSize == 0; \
@@ -153,11 +133,9 @@ typedef struct Stack
 })
 
 #define setEmpty(__stack) ({ \
-    int __ret; \
-    if (__stack == NULL) \
-    { \
+    int __ret = 0; \
+    if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = 0; \
     } \
     else { \
         __stack->currentSize = 0; \
@@ -167,11 +145,9 @@ typedef struct Stack
 })
 
 #define length(__stack) ({ \
-    int __ret; \
-    if (__stack == NULL) \
-    { \
+    int __ret = 0; \
+    if (__stack == NULL) { \
         fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
-        __ret = 0; \
     } \
     else { \
         __ret = __stack->currentSize; \
