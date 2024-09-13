@@ -41,60 +41,13 @@ void deleteLinkedList(LinkedList *linkedList);
     __ret; \
 })
 
-#define pop(__linkedList) ({ \
-    int __ret = 0; \
-    if (__linkedList == NULL) { \
-        fprintf(stderr, "ERROR: Linked List is not initialized!\n"); \
-    } \
-    else if (__linkedList->head == NULL) { \
-        fprintf(stderr, "ERROR: No elements in the Linked List!\n"); \
-    } \
-    else { \
-        Node *__ptr = __linkedList->head; \
-        if (__ptr != NULL) { \
-            __linkedList->head = __ptr->next; \
-            free(__ptr); \
-            __linkedList->length--; \
-            __ret = 1; \
-        } \
-    } \
-    __ret; \
-})
+void removeLL(LinkedList *linkedList);
 
-#define popAt(__linkedList, __index) ({ \
-    int __ret = 0; \
-    if (__linkedList == NULL) { \
-        fprintf(stderr, "ERROR: Linked List is not initialized!\n"); \
-    } \
-    else if (__linkedList->head == NULL) { \
-        fprintf(stderr, "ERROR: No elements in the Linked List!\n"); \
-    } \
-    else if (__index < 0) { \
-        fprintf(stderr, "ERROR: Index out of bound!\n"); \
-    } \
-    else { \
-        Node *__ptr = __linkedList->head; \
-        int __counter = 0; \
-        while (__ptr != NULL) { \
-            if (__counter == __index - 1) { \
-                break; \
-            } \
-            __ptr = __ptr->next; \
-            __counter++; \
-        } \
-        if (__ptr == NULL || __ptr->next == NULL) { \
-            fprintf(stderr, "ERROR: Index out of bound!\n"); \
-        } \
-        else { \
-            Node *__temp = __ptr->next; \
-            __ptr->next = __temp->next; \
-            free(__temp); \
-            __linkedList->length--; \
-            __ret = 1; \
-        } \
-    } \
-    __ret; \
-})
+Node *pop(LinkedList *linkedList);
+
+void removeAt(LinkedList *linkedList, int index);
+
+Node *popAt(LinkedList *linkedList, int index);
 
 #define valueAt(__linkedList, __index, __type) ({ \
     __type __ret = (__type)NULL; \
