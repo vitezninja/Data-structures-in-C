@@ -166,7 +166,7 @@ Node *popAt(LinkedList *linkedList, int index)
     return temp;
 }
 
-size_t length(LinkedList *linkedList)
+size_t length(const LinkedList *const linkedList)
 {
     if (linkedList == NULL)
     {

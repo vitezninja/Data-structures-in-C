@@ -80,6 +80,6 @@ Node *popAt(LinkedList *linkedList, int index);
     __ret; \
 })
 
-size_t length(LinkedList *linkedList);
+size_t length(const LinkedList *const linkedList);
 
 #endif
