@@ -56,10 +56,11 @@ void deleteStack(Stack *stack);
     else if (__stack->elementSize != sizeof(__type)) { \
         fprintf(stderr, "ERROR: Type mismatch!\n"); \
     } \
+    else if (isEmpty(__stack) == 0) { \
+        fprintf(stderr, "ERROR: Stack is empty!\n"); \
+    } \
     else { \
-        if (isEmpty(__stack) == 0) { \
-            __ret = ((__type *)__stack->data)[--__stack->currentSize]; \
-        } \
+        __ret = ((__type *)__stack->data)[--__stack->currentSize]; \
     } \
     __ret; \
 })
@@ -72,10 +73,31 @@ void deleteStack(Stack *stack);
     else if (__stack->elementSize != sizeof(__type)) { \
         fprintf(stderr, "ERROR: Type mismatch!\n"); \
     } \
+    else if (isEmpty(__stack) == 0) { \
+        fprintf(stderr, "ERROR: Stack is empty!\n"); \
+    } \
     else { \
-        if (isEmpty(__stack) == 0) { \
-            __ret = ((__type *)__stack->data)[__stack->currentSize - 1]; \
-        } \
+        __ret = ((__type *)__stack->data)[__stack->currentSize - 1]; \
+    } \
+    __ret; \
+})
+
+#define peek(__stack, __depth, __type) ({ \
+    __type __ret = (__type)NULL; \
+    if (__stack == NULL) { \
+        fprintf(stderr, "ERROR: Stack is not initialized!\n"); \
+    } \
+    else if (__stack->elementSize != sizeof(__type)) { \
+        fprintf(stderr, "ERROR: Type mismatch!\n"); \
+    } \
+    else if (isEmpty(__stack) == 0) { \
+        fprintf(stderr, "ERROR: Stack is empty!\n"); \
+    } \
+    else if (__depth >= __stack->currentSize) { \
+        fprintf(stderr, "ERROR: Depth is out of range!\n"); \
+    } \
+    else { \
+        __ret = ((__type *)__stack->data)[__stack->currentSize - 1 - __depth]; \
     } \
     __ret; \
 })
