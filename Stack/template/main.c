@@ -19,7 +19,7 @@ static char* strings[] = {
 
 int main()
 {
-    Stack *stack = initStack(char *);
+    Stack *stack = initStack(sizeof(char *));
 
     if (stack == NULL)
     {
